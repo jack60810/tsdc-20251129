@@ -1,0 +1,55 @@
+# 敏感資料
+*.env
+*.env.local
+*.key
+*.pem
+*.p12
+*.log
+*.secret
+
+# 資料檔案（可選：如果不想上傳 CSV 資料）
+# *.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# 備份檔案
+*.bak
+*.backup
+*~
+
