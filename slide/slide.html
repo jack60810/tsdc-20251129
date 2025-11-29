@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>企業實戰工作坊 - 上午場 (Final)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        neon: {
+                            blue: '#00f3ff',
+                            purple: '#bc13fe',
+                            green: '#0aff68',
+                            pink: '#ff0055',
+                        },
+                        dark: {
+                            bg: '#050505',
+                            card: 'rgba(20, 20, 25, 0.6)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #050505;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        #neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #0a0a12 0%, #000000 100%);
+        }
+
+
+        .reveal {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4,
+        .reveal h5,
+        .reveal h6 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: none;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal p,
+        .reveal li {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            font-weight: 300;
+        }
+
+        /* Slide Titles */
+        .slide-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            /* Reduced from 4xl/5xl */
+            font-weight: 700;
+            color: #00f3ff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Labels / Tags */
+        .tech-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-panel-glow {
+            background: rgba(20, 20, 25, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+
+        /* Text Effects */
+        .text-gradient-blue {
+            background: linear-gradient(to right, #00f3ff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-purple {
+            background: linear-gradient(to right, #bc13fe, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-green {
+            background: linear-gradient(to right, #0aff68, #00cc44);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reveal .slides section .fragment.visible {
+            opacity: 1;
+            visibility: inherit;
+        }
+
+        .math-formula {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            color: #e2e8f0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Glitch Effect */
+        @keyframes glitch-skew {
+            0% {
+                transform: skew(0deg);
+            }
+
+            20% {
+                transform: skew(-2deg);
+            }
+
+            40% {
+                transform: skew(2deg);
+            }
+
+            60% {
+                transform: skew(-1deg);
+            }
+
+            80% {
+                transform: skew(1deg);
+            }
+
+            100% {
+                transform: skew(0deg);
+            }
+        }
+
+        .glitch {
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+            text-shadow: 2px 0 #ff0055, -2px 0 #00f3ff;
+        }
+
+
+
+        /* Enhanced Glitch with Glow */
+        .glitch {
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+            text-shadow:
+                2px 0 #ff0055,
+                -2px 0 #00f3ff,
+                0 0 20px rgba(0, 243, 255, 0.8),
+                0 0 40px rgba(188, 19, 254, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="neural-canvas"></canvas>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- 1. Title -->
+            <section data-background-gradient="radial-gradient(circle at center, #1a202c 0%, #000000 100%)">
+                <div
+                    class="absolute inset-0 bg-[url('https://assets.codepen.io/13471/sparkles.gif')] opacity-20 pointer-events-none">
+                </div>
+                <h2 class="text-2xl font-bold mb-4 tracking-[0.3em] text-gray-400 uppercase">企業實戰工作坊</h2>
+                <h1 class="text-6xl font-black mb-6 leading-tight glitch">
+                    <span class="text-gradient-blue">DATA</span> <span class="text-white">&</span> <span
+                        class="text-gradient-purple">AI</span>
+                </h1>
+                <h3
+                    class="text-xl text-neon-blue font-light tracking-wider border-t border-b border-gray-700 py-3 inline-block">
+                    數據人的業界生存指南
+                </h3>
+                <div class="mt-12 flex items-center justify-center space-x-6">
+                    <div class="text-right">
+                        <p class="text-xl font-bold text-white">Jack Tsai</p>
+                        <p class="text-sm text-gray-400">AI / Data Manager</p>
+                    </div>
+                    <div class="h-10 w-0.5 bg-neon-blue"></div>
+                    <div class="text-left">
+                        <p class="text-xl font-bold text-white">9count</p>
+                        <p class="text-sm text-gray-400">Silicon Valley</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Agenda -->
+            <section>
+                <h3 class="slide-title">System Upload</h3>
+                <div class="grid grid-cols-1 gap-4 max-w-3xl mx-auto">
+                    <div
+                        class="glass-panel p-4 rounded-xl flex items-center fragment fade-right hover:border-neon-blue transition-colors duration-300">
+                        <span class="text-3xl font-bold text-gray-700 mr-6 font-display">01</span>
+                        <div class="text-left">
+                            <h4 class="text-lg font-bold text-white mb-1">Sector Analysis</h4>
+                            <p class="text-sm text-gray-400">產業揭密：競品分析與數據流</p>
+                        </div>
+                    </div>
+                    <div
+                        class="glass-panel p-4 rounded-xl flex items-center fragment fade-right hover:border-neon-green transition-colors duration-300">
+                        <span class="text-3xl font-bold text-gray-700 mr-6 font-display">02</span>
+                        <div class="text-left">
+                            <h4 class="text-lg font-bold text-white mb-1">Statistical Core</h4>
+                            <p class="text-sm text-gray-400">統計實戰：Elo Rating 與 A/B Testing</p>
+                        </div>
+                    </div>
+                    <div
+                        class="glass-panel p-4 rounded-xl flex items-center fragment fade-right hover:border-neon-pink transition-colors duration-300">
+                        <span class="text-3xl font-bold text-gray-700 mr-6 font-display">03</span>
+                        <div class="text-left">
+                            <h4 class="text-lg font-bold text-white mb-1">Dark Data</h4>
+                            <p class="text-sm text-gray-400">數據黑暗面：AI 安全與詐騙偵測</p>
+                        </div>
+                    </div>
+                    <div
+                        class="glass-panel p-4 rounded-xl flex items-center fragment fade-right hover:border-neon-purple transition-colors duration-300">
+                        <span class="text-3xl font-bold text-gray-700 mr-6 font-display">04</span>
+                        <div class="text-left">
+                            <h4 class="text-lg font-bold text-white mb-1">Career & Tools</h4>
+                            <p class="text-sm text-gray-400">職涯導航 & 工具革命 (Cursor)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Introduction -->
+            <section>
+                <div class="flex items-center justify-between gap-8 h-full">
+                    <div class="w-1/2 text-left">
+                        <h3 class="slide-title mb-8">Identity</h3>
+                        <div class="space-y-6">
+                            <div class="glass-panel p-6 rounded-lg border-l-4 border-neon-blue">
+                                <span class="tech-label mb-2 block w-max">Current Status</span>
+                                <p class="text-xl text-white font-bold">AI/Data Manager @ 9count</p>
+                            </div>
+                            <div>
+                                <span class="tech-label mb-4 block w-max">Previous Logs</span>
+                                <!-- Updated List Layout: Single line, no bullets -->
+                                <div class="flex flex-wrap gap-3 text-gray-300">
+                                    <span class="bg-white/10 px-3 py-1 rounded-full text-sm border border-white/10">Sr.
+                                        Data Scientist @ 17Live</span>
+                                    <span class="bg-white/10 px-3 py-1 rounded-full text-sm border border-white/10">Data
+                                        Scientist @ Goodnight</span>
+                                    <span class="bg-white/10 px-3 py-1 rounded-full text-sm border border-white/10">Data
+                                        Scientist @ Huawei</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <!-- Updated Quote Card with Project Gutenberg Background -->
+                        <div
+                            class="glass-panel-glow p-8 rounded-2xl relative overflow-hidden h-64 flex flex-col justify-end bg-[url('https://image.tmdb.org/t/p/original/wz5QdY2s0GgKzG76wZ4g8g.jpg')] bg-cover bg-center">
+                            <div class="absolute inset-0 bg-black/60"></div> <!-- Overlay -->
+                            <div class="relative z-10">
+                                <p class="text-xl italic text-gray-100 leading-relaxed">
+                                    "一百萬人裡，只有一個主角。<br>
+                                    而這個主角就是把事情做到極致，<br>
+                                    但首先這個主角要先找到舞台。"
+                                </p>
+                                <p class="text-right text-sm mt-4 text-neon-purple font-display">-- 無雙 (Project
+                                    Gutenberg)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Industry Overview -->
+            <section>
+                <h3 class="slide-title mb-8">Social Discovery</h3>
+                <div class="grid grid-cols-2 gap-8">
+                    <div
+                        class="glass-panel p-8 rounded-2xl border-t-2 border-neon-pink hover:bg-white/5 transition-all">
+                        <h4 class="text-2xl font-bold mb-4 text-neon-pink font-display">MISSION</h4>
+                        <p class="text-lg text-gray-300 leading-relaxed">建立世界上最好的線上社群，讓你在其中可以表達最真實的自我。</p>
+                    </div>
+                    <div
+                        class="glass-panel p-8 rounded-2xl border-t-2 border-neon-purple hover:bg-white/5 transition-all">
+                        <h4 class="text-2xl font-bold mb-4 text-neon-purple font-display">WHY DATA?</h4>
+                        <p class="text-lg text-white font-bold mb-2">Z 世代的孤獨與焦慮。</p>
+                        <p class="text-sm text-gray-400">每一次點擊、滑動，都是一個獨特的故事。</p>
+                    </div>
+                </div>
+                <div class="mt-12 fragment">
+                    <div
+                        class="inline-block px-8 py-3 rounded-full border border-neon-green bg-neon-green/10 text-neon-green font-bold text-xl tracking-widest shadow-[0_0_15px_rgba(10,255,104,0.3)]">
+                        Wink / 9count
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Competitor Landscape -->
+            <section>
+                <h3 class="slide-title mb-8">The Landscape</h3>
+                <div class="grid grid-cols-5 gap-4 mt-4">
+                    <!-- Tinder -->
+                    <div class="flex flex-col items-center fragment fade-right group">
+                        <div
+                            class="w-20 h-20 glass-panel rounded-2xl mb-4 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 border border-pink-500/30 bg-white/10">
+                            <img src="./tinder.png" alt="Tinder" class="w-12 h-12 object-contain">
+                        </div>
+                        <h4 class="text-base font-bold text-white">Tinder</h4>
+                        <p class="text-[10px] text-gray-500 mt-1 font-mono">"Swipe Right"</p>
+                    </div>
+                    <!-- Grindr -->
+                    <div class="flex flex-col items-center fragment fade-up group" data-fragment-index="1">
+                        <div
+                            class="w-20 h-20 glass-panel rounded-2xl mb-4 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 border border-yellow-500/30 bg-white/10">
+                            <img src="./grindr.svg" alt="Grindr" class="w-12 h-12 object-contain rounded-lg">
+                        </div>
+                        <h4 class="text-base font-bold text-white">Grindr</h4>
+                        <p class="text-[10px] text-gray-500 mt-1 font-mono">"0 Feet Away"</p>
+                    </div>
+                    <!-- CMB -->
+                    <div class="flex flex-col items-center fragment zoom-in group" data-fragment-index="2">
+                        <div
+                            class="w-20 h-20 glass-panel rounded-2xl mb-4 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 border border-blue-600/30 bg-white/10">
+                            <img src="./cmb.png" alt="CMB" class="w-12 h-12 object-contain">
+                        </div>
+                        <h4 class="text-base font-bold text-white">CMB</h4>
+                        <p class="text-[10px] text-gray-500 mt-1 font-mono">"Quality > Quantity"</p>
+                    </div>
+                    <!-- Pure -->
+                    <div class="flex flex-col items-center fragment fade-up group" data-fragment-index="3">
+                        <div
+                            class="w-20 h-20 glass-panel rounded-2xl mb-4 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 border border-pink-300/30 bg-white/10">
+                            <img src="./pure.png" alt="Pure" class="w-12 h-12 object-contain rounded-lg">
+                        </div>
+                        <h4 class="text-base font-bold text-white">Pure</h4>
+                        <p class="text-[10px] text-gray-500 mt-1 font-mono">"Now & Anonymous"</p>
+                    </div>
+                    <!-- Down -->
+                    <div class="flex flex-col items-center fragment fade-left group" data-fragment-index="4">
+                        <div
+                            class="w-20 h-20 glass-panel rounded-2xl mb-4 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 border border-red-600/30 bg-white/10">
+                            <img src="./down.png" alt="Down" class="w-12 h-12 object-contain rounded-lg">
+                        </div>
+                        <h4 class="text-base font-bold text-white">Down</h4>
+                        <p class="text-[10px] text-gray-500 mt-1 font-mono">"Date vs Hookup"</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Mechanism Comparison -->
+            <section>
+                <h3 class="slide-title mb-8">Control Mechanism</h3>
+                <div class="grid grid-cols-2 gap-8">
+                    <!-- Left: Algorithm Driven -->
+                    <div
+                        class="glass-panel p-6 rounded-2xl border border-neon-pink/30 fragment hover:shadow-[0_0_30px_rgba(255,0,85,0.2)] transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <div class="w-2 h-2 bg-neon-pink rounded-full mr-3 animate-pulse"></div>
+                            <h4 class="text-xl font-bold text-white font-display">ALGORITHM</h4>
+                        </div>
+                        <p class="text-left text-xs text-gray-400 mb-4 font-mono">>> SYSTEM_OVERRIDE: TRUE</p>
+                        <ul class="text-left space-y-3 text-sm">
+                            <li class="flex items-start"><span class="text-neon-pink mr-2">/</span> <span><strong
+                                        class="text-white">Data:</strong> Behavior (Swipes)</span></li>
+                            <li class="flex items-start"><span class="text-neon-pink mr-2">/</span> <span><strong
+                                        class="text-white">Logic:</strong> Collaborative Filtering</span></li>
+                            <li class="flex items-start"><span class="text-neon-pink mr-2">/</span> <span><strong
+                                        class="text-white">Goal:</strong> Maximize Matches</span></li>
+                        </ul>
+                    </div>
+                    <!-- Right: Location Driven -->
+                    <div
+                        class="glass-panel p-6 rounded-2xl border border-yellow-500/30 fragment hover:shadow-[0_0_30px_rgba(234,179,8,0.2)] transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3 animate-pulse"></div>
+                            <h4 class="text-xl font-bold text-white font-display">LOCATION</h4>
+                        </div>
+                        <p class="text-left text-xs text-gray-400 mb-4 font-mono">>> GPS_TRACKING: ACTIVE</p>
+                        <ul class="text-left space-y-3 text-sm">
+                            <li class="flex items-start"><span class="text-yellow-500 mr-2">/</span> <span><strong
+                                        class="text-white">Data:</strong> Geo-spatial</span></li>
+                            <li class="flex items-start"><span class="text-yellow-500 mr-2">/</span> <span><strong
+                                        class="text-white">Logic:</strong> Distance Sorting</span></li>
+                            <li class="flex items-start"><span class="text-yellow-500 mr-2">/</span> <span><strong
+                                        class="text-white">Goal:</strong> Maximize Efficiency</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Intent Spectrum -->
+            <section>
+                <h3 class="slide-title mb-12">Intent Spectrum</h3>
+                <div class="relative py-12 px-4">
+                    <!-- Line -->
+                    <div class="absolute top-1/2 left-0 w-full h-1 bg-gray-800 rounded"></div>
+                    <div
+                        class="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-900 via-gray-500 to-red-900 opacity-50">
+                    </div>
+
+                    <!-- Nodes -->
+                    <div class="absolute top-1/2 left-0 transform -translate-y-1/2 fragment">
+                        <div class="glass-panel px-6 py-4 rounded-xl border border-blue-500/50 backdrop-blur-xl">
+                            <h4 class="font-bold text-blue-400 font-display">SLOW</h4>
+                            <p class="text-xs text-gray-400 mt-1">Relationship</p>
+                        </div>
+                        <div
+                            class="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-sm text-blue-500 font-bold">
+                            CMB</div>
+                    </div>
+
+                    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 fragment">
+                        <div class="glass-panel px-6 py-4 rounded-xl border border-red-500/50 backdrop-blur-xl">
+                            <h4 class="font-bold text-red-500 font-display">FAST</h4>
+                            <p class="text-xs text-gray-400 mt-1">Hookup</p>
+                        </div>
+                        <div
+                            class="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-sm text-red-500 font-bold">
+                            Pure</div>
+                    </div>
+
+                    <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 fragment">
+                        <div
+                            class="glass-panel px-8 py-4 rounded-xl border border-gray-500/50 backdrop-blur-xl z-10 relative shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            <h4 class="font-bold text-white font-display">GENERAL</h4>
+                            <p class="text-xs text-gray-400 mt-1">Hybrid</p>
+                        </div>
+                        <div
+                            class="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-sm text-gray-400 font-bold">
+                            Tinder</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. The Workflow -->
+            <section>
+                <h3 class="slide-title mb-8">Core Value</h3>
+                <div class="relative flex items-center justify-between mt-8 px-4">
+                    <!-- Left Node -->
+                    <div
+                        class="w-5/12 glass-panel p-6 rounded-2xl border-l-4 border-yellow-400 relative overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity text-5xl">
+                            🎯</div>
+                        <h4 class="text-xl font-bold text-yellow-400 mb-2 font-display">DEFINE</h4>
+                        <span class="tech-label mb-4 inline-block">PROBLEM_SPACE</span>
+                        <p class="text-base text-white">"老闆真正想解決什麼問題？"</p>
+                    </div>
+
+                    <!-- Center Connector -->
+                    <div class="flex-1 flex flex-col items-center px-4 relative">
+                        <div class="w-full h-0.5 bg-gradient-to-r from-yellow-400/50 to-green-400/50 absolute top-1/2">
+                        </div>
+                        <div
+                            class="flex flex-col space-y-2 z-10 bg-[#050505] px-2 py-2 rounded-xl border border-gray-800">
+                            <!-- Updated Text: ETL & Analysis/Modeling -->
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-neon-blue rounded-full"></div>
+                                <span class="text-xs font-bold text-neon-blue font-mono">ETL (Data)</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-neon-purple rounded-full"></div>
+                                <span class="text-xs font-bold text-neon-purple font-mono">Analysis / Modeling</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Node -->
+                    <div
+                        class="w-5/12 glass-panel p-6 rounded-2xl border-r-4 border-green-400 relative overflow-hidden group">
+                        <div
+                            class="absolute top-0 left-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity text-5xl">
+                            🚀</div>
+                        <h4 class="text-xl font-bold text-green-400 mb-2 font-display">ACTION</h4>
+                        <span class="tech-label mb-4 inline-block">SOLUTION_SPACE</span>
+                        <p class="text-base text-white">"數據告訴我們下一步該做什麼？"</p>
+                    </div>
+                </div>
+                <div class="mt-12 fragment fade-up">
+                    <p class="text-2xl font-light text-gray-300">"技術是橋樑，<span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600 font-bold">價值</span>
+                        才是目的地。"</p>
+                </div>
+            </section>
+
+            <!-- 9. Stats in Action Title -->
+            <section data-background-gradient="linear-gradient(45deg, #000000, #1a202c)">
+                <div
+                    class="absolute inset-0 bg-[url('https://assets.codepen.io/13471/sparkles.gif')] opacity-10 pointer-events-none">
+                </div>
+                <h2 class="text-5xl font-black text-white mb-6 font-display tracking-tighter">
+                    STATS <span class="text-neon-blue">X</span> BUSINESS
+                </h2>
+                <div class="w-24 h-1 bg-neon-blue mx-auto mb-8"></div>
+                <p class="text-xl text-gray-400 font-light tracking-widest">MATH BECOMES PRODUCT</p>
+            </section>
+
+            <!-- 10. Elo Rating -->
+            <section>
+                <h3 class="slide-title mb-6">Elo Rating System</h3>
+                <p class="text-lg text-gray-400 mb-8">The Engine of Matchmaking</p>
+
+                <div class="glass-panel-glow p-8 rounded-2xl inline-block mb-8">
+                    <p class="math-formula text-3xl text-white">$$ E_A = \frac{1}{1 + 10^{(R_B - R_A)/400}} $$</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="glass-panel p-6 rounded-xl border-l-2 border-green-500 fragment">
+                        <h4 class="font-bold text-green-400 mb-2 font-display">STATISTICS</h4>
+                        <p class="text-sm text-gray-300">預期勝率 (Expected Score)</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl border-l-2 border-pink-500 fragment">
+                        <h4 class="font-bold text-pink-400 mb-2 font-display">BUSINESS</h4>
+                        <p class="text-sm text-gray-300">避免強者恆強 (Dynamic Weighting)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. Elo Calculation -->
+            <section>
+                <h3 class="slide-title mb-4">Simulation</h3>
+                <div class="flex justify-center items-center space-x-12 mb-4">
+                    <!-- Removed Faces -->
+                    <div class="text-center relative">
+                        <div
+                            class="w-20 h-20 rounded-full border-4 border-green-500 flex items-center justify-center bg-gray-900 shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+                            <span class="text-2xl font-bold text-green-400">A</span>
+                        </div>
+                        <div class="mt-1">
+                            <p class="font-bold text-green-400 text-base font-display">USER A</p>
+                            <p class="text-gray-500 font-mono text-xs">R: 1600</p>
+                        </div>
+                    </div>
+
+                    <div class="text-xl font-black text-white font-display italic opacity-50">VS</div>
+
+                    <div class="text-center relative">
+                        <div
+                            class="w-20 h-20 rounded-full border-4 border-yellow-500 flex items-center justify-center bg-gray-900 shadow-[0_0_20px_rgba(234,179,8,0.3)]">
+                            <span class="text-2xl font-bold text-yellow-400">B</span>
+                        </div>
+                        <div class="mt-1">
+                            <p class="font-bold text-yellow-400 text-base font-display">USER B</p>
+                            <p class="text-gray-500 font-mono text-xs">R: 1200</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-4 rounded-xl max-w-4xl mx-auto text-left relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-neon-blue"></div>
+                    <!-- Added Calculation Steps -->
+                    <div
+                        class="mb-4 font-mono text-xs text-gray-300 bg-black/30 p-3 rounded-lg grid grid-cols-2 gap-x-4 gap-y-1">
+                        <p><span class="text-neon-blue">Step 1:</span> Diff = 1200 - 1600 = -400</p>
+                        <p><span class="text-neon-blue">Step 2:</span> Exponent = -400 / 400 = -1</p>
+                        <p><span class="text-neon-blue">Step 3:</span> Denom = 1 + 10^(-1) = 1.1</p>
+                        <p><span class="text-neon-blue">Step 4:</span> E_A = 1 / 1.1 ≈ 0.909</p>
+                    </div>
+
+                    <p class="mb-4 text-base text-white"><span
+                            class="text-neon-blue font-bold font-mono mr-4">[RESULT]</span> 預期勝率 <span
+                            class="math-formula text-neon-blue">E_A ≈ 91%</span></p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-green-900/20 p-3 rounded-lg border border-green-500/30 fragment">
+                            <p class="font-bold text-green-400 mb-1 flex items-center text-sm"><span
+                                    class="mr-2">✓</span> MATCH</p>
+                            <p class="font-mono text-gray-300 text-sm">1600 + 32(1 - 0.91) ≈ <span
+                                    class="text-green-400 font-bold">1603</span></p>
+                        </div>
+                        <div class="bg-red-900/20 p-3 rounded-lg border border-red-500/30 fragment">
+                            <p class="font-bold text-red-400 mb-1 flex items-center text-sm"><span class="mr-2">✗</span>
+                                REJECT</p>
+                            <p class="font-mono text-gray-300 text-sm">1600 + 32(0 - 0.91) ≈ <span
+                                    class="text-red-400 font-bold">1571</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 12. Elo Application -->
+            <section>
+                <div class="flex justify-between items-center gap-8 h-full">
+                    <div class="w-1/3 text-left">
+                        <h3 class="slide-title mb-6">Application</h3>
+                        <h4 class="text-lg text-white mb-6 font-light">Identifying High-Value Assets</h4>
+
+                        <div class="space-y-4">
+                            <div class="glass-panel p-4 rounded-xl border-l-4 border-yellow-400 fragment">
+                                <h4 class="text-base font-bold text-yellow-400 mb-1 font-display">TIERING SYSTEM</h4>
+                                <ul class="text-sm text-gray-400 space-y-1 font-mono">
+                                    <li>> GOLD : > 1800</li>
+                                    <li>> SILVER : 1500 - 1800</li>
+                                </ul>
+                            </div>
+                            <div class="glass-panel p-4 rounded-xl border-l-4 border-pink-500 fragment">
+                                <h4 class="text-base font-bold text-pink-500 mb-1 font-display">MONETIZATION</h4>
+                                <p class="text-sm text-gray-300">"Top Picks" - Packaging high ELO users as premium
+                                    content.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Updated Application UI with Before/After Comparison -->
+                    <div class="w-2/3 flex justify-center gap-4 fragment">
+                        <div class="flex flex-col items-center">
+                            <span class="text-gray-400 font-bold mb-2 tracking-widest text-sm">BEFORE</span>
+                            <img src="./before.png" alt="Before UI"
+                                class="rounded-xl border-2 border-gray-700 shadow-xl h-[400px] w-auto object-cover">
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-neon-blue font-bold mb-2 tracking-widest text-sm">AFTER</span>
+                            <img src="./after.png" alt="After UI"
+                                class="rounded-xl border-2 border-neon-blue shadow-[0_0_20px_rgba(0,243,255,0.3)] h-[400px] w-auto object-cover">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 13. A/B Testing -->
+            <section>
+                <h3 class="slide-title mb-4">A/B Experiment</h3>
+                <span class="tech-label mb-8 inline-block">CASE: PRICING_STRATEGY ($19.99 vs $14.99)</span>
+
+                <div class="flex justify-center items-stretch space-x-6">
+                    <div class="w-1/2 glass-panel p-6 rounded-xl border-t-4 border-green-500 fragment flex flex-col">
+                        <h5 class="text-lg font-bold text-green-400 mb-4 font-display">PRODUCT TEAM</h5>
+                        <div class="space-y-3 flex-grow text-sm">
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-400">Conversion</span>
+                                <span class="text-green-400 font-bold">⬆ High</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-400">Revenue</span>
+                                <span class="text-gray-300 font-bold">Flat (=)</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-green-500/20 py-2 rounded text-green-400 font-bold tracking-wider text-sm">
+                            LAUNCH 🚀
+                        </div>
+                    </div>
+
+                    <div class="w-1/2 glass-panel p-6 rounded-xl border-t-4 border-red-500 fragment flex flex-col">
+                        <h5 class="text-lg font-bold text-red-500 mb-4 font-display">MARKETING TEAM</h5>
+                        <div class="space-y-3 flex-grow text-sm">
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-400">ROAS</span>
+                                <span class="text-red-500 font-bold">⬇ Crash (-20%)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span class="text-gray-400">Algorithm</span>
+                                <span class="text-gray-300 font-bold">Confused</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-red-500/20 py-2 rounded text-red-500 font-bold tracking-wider text-sm">
+                            ROLLBACK 🚨
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 fragment">
+                    <div
+                        class="glass-panel px-8 py-4 rounded-full border border-yellow-500/50 inline-flex items-center space-x-4">
+                        <span class="text-2xl">💡</span>
+                        <!-- Updated Quote -->
+                        <p class="text-gray-200 text-lg font-light">
+                            "平庸的分析師 優化模型，<br>
+                            <span class="text-yellow-400 font-bold">卓越的資料人 賦能商業</span>。"
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 14. Safety Part 1 -->
+            <section>
+                <h3 class="slide-title mb-2 text-red-500 border-red-500/30 text-shadow-red">Security Protocol</h3>
+                <span class="tech-label mb-8 inline-block">LAYER 1: BIOMETRIC VERIFICATION</span>
+
+                <div class="flex justify-between items-stretch space-x-8">
+                    <div
+                        class="w-1/2 glass-panel p-6 rounded-2xl border border-gray-700 hover:border-yellow-400 transition-colors fragment group">
+                        <div class="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">✌️</div>
+                        <h4 class="text-xl font-bold text-white mb-2 font-display">CHALLENGE</h4>
+                        <p class="text-xs text-gray-400 font-mono">Interactive Response</p>
+                    </div>
+                    <div
+                        class="w-1/2 glass-panel p-6 rounded-2xl border border-gray-700 hover:border-red-500 transition-colors fragment group">
+                        <div class="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">🧬</div>
+                        <h4 class="text-xl font-bold text-white mb-2 font-display">LIVENESS</h4>
+                        <p class="text-xs text-gray-400 font-mono">3D Structure Analysis</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 15. Safety Part 2 -->
+            <section>
+                <h3 class="slide-title mb-2 text-red-500 border-red-500/30 text-shadow-red">Security Protocol</h3>
+                <span class="tech-label mb-8 inline-block">LAYER 2: SEMANTIC ANALYSIS (NLP)</span>
+
+                <div class="grid grid-cols-12 gap-4">
+                    <div
+                        class="col-span-4 glass-panel p-4 rounded-xl flex flex-col items-center justify-center fragment border border-gray-700">
+                        <div class="text-4xl mb-2">💬</div>
+                        <h5 class="font-bold text-white font-display text-sm">CHAT LOGS</h5>
+                        <p class="text-[10px] text-gray-500 mt-1 font-mono">Raw Input</p>
+                    </div>
+
+                    <div
+                        class="col-span-8 glass-panel p-4 rounded-xl border border-red-500/30 relative overflow-hidden fragment">
+                        <div class="absolute top-0 right-0 p-2">
+                            <div class="flex space-x-1">
+                                <div class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse delay-75"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse delay-150"></div>
+                            </div>
+                        </div>
+                        <h5 class="font-bold text-red-400 mb-4 flex items-center font-display text-sm"><span
+                                class="text-xl mr-2">🤖</span> LLM DETECTOR</h5>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center p-2 bg-red-900/10 rounded border-l-2 border-red-500">
+                                <span class="text-red-500 font-bold mr-3 font-mono text-xs">[ALERT]</span>
+                                <div>
+                                    <p class="text-xs font-bold text-white">Script Detection</p>
+                                    <p class="text-[10px] text-gray-400">Pattern Matching: "Pig Butchering" Scams</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-2 bg-orange-900/10 rounded border-l-2 border-orange-500">
+                                <span class="text-orange-500 font-bold mr-3 font-mono text-xs">[WARN]</span>
+                                <div>
+                                    <p class="text-xs font-bold text-white">Toxic Behavior</p>
+                                    <p class="text-[10px] text-gray-400">Harassment Intent Analysis</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 fragment">
+                    <p class="text-base text-gray-300 font-light">"從 <span class="text-yellow-400 font-bold">物理層</span>
+                        到 <span class="text-red-400 font-bold">語意層</span> 的縱深防禦。"</p>
+                </div>
+            </section>
+
+            <!-- 16. Career -->
+            <section>
+                <h3 class="slide-title mb-8">Career Pathway</h3>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <div
+                        class="w-1/3 glass-panel p-4 rounded-xl border-t-2 border-purple-500 fragment fade-right hover:-translate-y-2 transition-transform duration-300">
+                        <h4 class="font-bold text-purple-400 font-display mb-1 text-lg">ANALYST</h4>
+                        <p class="text-[10px] text-gray-500">Insight Discovery</p>
+                    </div>
+                    <div
+                        class="w-1/3 glass-panel p-4 rounded-xl border-t-2 border-blue-500 fragment hover:-translate-y-2 transition-transform duration-300">
+                        <h4 class="font-bold text-blue-400 font-display mb-1 text-lg">SCIENTIST</h4>
+                        <p class="text-[10px] text-gray-500">Model Development</p>
+                    </div>
+                    <div
+                        class="w-1/3 glass-panel p-4 rounded-xl border-t-2 border-green-500 fragment fade-left hover:-translate-y-2 transition-transform duration-300">
+                        <h4 class="font-bold text-green-400 font-display mb-1 text-lg">ENGINEER</h4>
+                        <p class="text-[10px] text-gray-500">System Deployment</p>
+                    </div>
+                </div>
+
+                <div
+                    class="mt-12 mx-auto w-full max-w-4xl glass-panel-glow p-6 rounded-2xl fragment fade-up cursor-pointer group hover:bg-white/5 transition-colors">
+                    <div class="flex items-center justify-center space-x-6">
+                        <h4
+                            class="text-4xl font-black text-white group-hover:text-neon-blue transition-colors font-display">
+                            DATA</h4>
+                        <div class="h-10 w-0.5 bg-gray-600"></div>
+                        <p class="text-xl text-gray-300 italic">"不要被任何的 <span
+                                class="text-neon-blue font-bold border-b-2 border-neon-blue">標籤</span> 限制住"</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 17. Tool Revolution -->
+            <section>
+                <h3 class="slide-title mb-8 text-yellow-400 border-yellow-400/30">The Revolution</h3>
+                <div class="grid grid-cols-2 gap-12 mt-8 items-center">
+                    <div
+                        class="opacity-40 grayscale blur-[1px] transition-all duration-500 hover:blur-0 hover:grayscale-0 hover:opacity-100">
+                        <h4 class="text-2xl font-bold text-gray-400 mb-2 font-display">LEGACY</h4>
+                        <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden mb-2">
+                            <div class="bg-gray-500 h-full" style="width: 80%"></div>
+                        </div>
+                        <p class="text-xs font-mono text-gray-500">80% CODING / SYNTAX</p>
+                    </div>
+
+                    <div
+                        class="transform scale-110 glass-panel-glow p-6 rounded-2xl border border-neon-green/50 relative">
+                        <div
+                            class="absolute -top-3 -right-3 bg-neon-green text-black font-bold px-2 py-0.5 rounded text-[10px]">
+                            NEW STANDARD</div>
+                        <h4 class="text-2xl font-bold text-neon-green mb-4 font-display">AI NATIVE</h4>
+                        <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden mb-2">
+                            <div class="bg-neon-green h-full shadow-[0_0_10px_#0aff68]" style="width: 80%"></div>
+                        </div>
+                        <p class="text-xs font-mono text-green-400">80% STRATEGY & LOGIC</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 18. Coming Up Next -->
+            <section>
+                <h3 class="slide-title mb-2">COMING UP NEXT</h3>
+                <h1 class="text-5xl font-black text-white mb-2 font-display tracking-tighter glitch">
+                    PROJECT: <span class="text-neon-pink">VOX POPULI</span>
+                </h1>
+                <p class="text-xl text-gray-400 font-mono mb-12 tracking-widest">YouTube Sentiment Analysis</p>
+
+                <div class="flex items-center justify-center space-x-4 max-w-5xl mx-auto">
+                    <!-- Step 1 -->
+                    <div
+                        class="glass-panel p-6 rounded-xl border border-red-600/50 flex flex-col items-center w-1/3 fragment fade-right">
+                        <div class="text-4xl mb-4">📺</div>
+                        <h4 class="font-bold text-white mb-2 font-display">SOURCE</h4>
+                        <p class="text-xs text-gray-400 font-mono">YouTube API</p>
+                        <div class="mt-4 bg-red-900/20 px-3 py-1 rounded text-red-400 text-xs border border-red-500/30">
+                            GET /comments
+                        </div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="text-neon-blue text-2xl animate-pulse fragment fade-up">➜</div>
+
+                    <!-- Step 2 -->
+                    <div
+                        class="glass-panel p-6 rounded-xl border border-neon-blue/50 flex flex-col items-center w-1/3 fragment zoom-in">
+                        <div class="text-4xl mb-4">🧠</div>
+                        <h4 class="font-bold text-white mb-2 font-display">ENGINE</h4>
+                        <p class="text-xs text-gray-400 font-mono">NLP / LLM</p>
+                        <div
+                            class="mt-4 bg-blue-900/20 px-3 py-1 rounded text-neon-blue text-xs border border-neon-blue/30">
+                            analyze_sentiment()
+                        </div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="text-neon-green text-2xl animate-pulse fragment fade-up">➜</div>
+
+                    <!-- Step 3 -->
+                    <div
+                        class="glass-panel p-6 rounded-xl border border-neon-green/50 flex flex-col items-center w-1/3 fragment fade-left">
+                        <div class="text-4xl mb-4">📊</div>
+                        <h4 class="font-bold text-white mb-2 font-display">INSIGHT</h4>
+                        <p class="text-xs text-gray-400 font-mono">Dashboard</p>
+                        <div
+                            class="mt-4 bg-green-900/20 px-3 py-1 rounded text-neon-green text-xs border border-neon-green/30">
+                            Plotly / Streamlit
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 19. Q&A -->
+            <section>
+                <div
+                    class="glass-panel-glow p-10 rounded-full w-48 h-48 flex items-center justify-center mx-auto mb-8 relative z-10">
+                    <h2 class="text-5xl font-bold text-white font-display">Q & A</h2>
+                </div>
+                <p class="text-xl text-neon-blue font-light tracking-[0.5em] relative z-10">THANK YOU</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/math/math.min.js"></script>
+    <script>
+        // Initialize Reveal.js with Fast Zoom and Math Plugin
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'zoom', // Zoom transition for high energy
+            transitionSpeed: 'fast', // Fast speed
+            width: 960,
+            height: 700,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0,
+            plugins: [RevealMath.KaTeX]
+        });
+
+        // --- NEON NEURAL NETWORK BACKGROUND ---
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        // Configuration
+        const particleCount = 60; // Number of nodes
+        const connectionDistance = 150; // Max distance to connect
+        const mouseDistance = 200; // Mouse interaction radius
+        const colors = ['#00f3ff', '#bc13fe', '#0aff68']; // Neon Cyan, Purple, Green
+
+        // Resize handling
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Mouse tracking
+        const mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Particle Class
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 1.5; // Velocity
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                // Mouse interaction (repel/attract)
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouseDistance) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        const directionX = forceDirectionX * force * 0.5;
+                        const directionY = forceDirectionY * force * 0.5;
+                        this.vx -= directionX;
+                        this.vy -= directionY;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+            }
+        }
+
+        // Initialize Particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        // Animation Loop
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw Connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        let opacity = 1 - (distance / connectionDistance);
+                        ctx.strokeStyle = `rgba(100, 100, 255, ${opacity * 0.2})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Update and Draw Particles
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // --- TEXT SCRAMBLE EFFECT ---
+        class TextScramble {
+            constructor(el) {
+                this.el = el;
+                this.chars = '!<>-_\\/[]{}—=+*^?#________';
+                this.update = this.update.bind(this);
+            }
+            setText(newText) {
+                const oldText = this.el.innerText;
+                const length = Math.max(oldText.length, newText.length);
+                const promise = new Promise((resolve) => this.resolve = resolve);
+                this.queue = [];
+                for (let i = 0; i < length; i++) {
+                    const from = oldText[i] || '';
+                    const to = newText[i] || '';
+                    const start = Math.floor(Math.random() * 40);
+                    const end = start + Math.floor(Math.random() * 40);
+                    this.queue.push({ from, to, start, end });
+                }
+                cancelAnimationFrame(this.frameRequest);
+                this.frame = 0;
+                this.update();
+                return promise;
+            }
+            update() {
+                let output = '';
+                let complete = 0;
+                for (let i = 0, n = this.queue.length; i < n; i++) {
+                    let { from, to, start, end, char } = this.queue[i];
+                    if (this.frame >= end) {
+                        complete++;
+                        output += to;
+                    } else if (this.frame >= start) {
+                        if (!char || Math.random() < 0.28) {
+                            char = this.randomChar();
+                            this.queue[i].char = char;
+                        }
+                        output += `<span class="dud">${char}</span>`;
+                    } else {
+                        output += from;
+                    }
+                }
+                this.el.innerHTML = output;
+                if (complete === this.queue.length) {
+                    this.resolve();
+                } else {
+                    this.frameRequest = requestAnimationFrame(this.update);
+                    this.frame++;
+                }
+            }
+            randomChar() {
+                return this.chars[Math.floor(Math.random() * this.chars.length)];
+            }
+        }
+
+        // Apply Scramble on Slide Change
+        Reveal.on('slidechanged', event => {
+            const currentSlide = event.currentSlide;
+            const title = currentSlide.querySelector('.slide-title, h1, h2');
+            if (title && !title.dataset.scrambled) {
+                const fx = new TextScramble(title);
+                fx.setText(title.innerText);
+                title.dataset.scrambled = "true"; // Only scramble once per session or reset if needed
+            }
+        });
+
+        // Initial Scramble for first slide
+        setTimeout(() => {
+            const firstTitle = document.querySelector('.reveal .slides section.present h1');
+            if (firstTitle) {
+                const fx = new TextScramble(firstTitle);
+                fx.setText(firstTitle.innerText);
+            }
+        }, 1000);
+
+    </script>
+</body>
+
+</html>
